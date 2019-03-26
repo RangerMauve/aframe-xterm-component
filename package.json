@@ -1,0 +1,30 @@
+{
+  "name": "aframe-xterm-component",
+  "version": "1.0.0",
+  "description": "Playing around with getting xterm.js working in Aframe VR",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/RangerMauve/aframe-xterm-component.git"
+  },
+  "keywords": [
+    "aframe",
+    "vr",
+    "terminal",
+    "xterm",
+    "texture",
+    "ansii"
+  ],
+  "author": "rangermauve",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/RangerMauve/aframe-xterm-component/issues"
+  },
+  "homepage": "https://github.com/RangerMauve/aframe-xterm-component#readme",
+  "dependencies": {
+    "xterm": "^3.12.0"
+  }
+}
