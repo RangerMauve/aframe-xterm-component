@@ -13,7 +13,7 @@ const wss = new WebSocket.Server({
 })
 
 wss.on('connection', (connection) => {
-  const pty = child_process.swam('/bin/bash', {
+  const pty = child_process.spawn('/bin/bash', {
     cwd: process.env.HOME,
     env: process.env
   })
