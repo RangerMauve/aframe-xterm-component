@@ -3,6 +3,7 @@ const https = require('http');
 const WebSocket = require('ws');
 const os = require('os');
 const path = require('path')
+const net = require('net')
 
 
 const server = new https.createServer()
@@ -12,23 +13,15 @@ const wss = new WebSocket.Server({
 })
 
 wss.on('connection', (connection) => {
-  fs.open('/dev/pts/0', 'r+', (err, fd) => {
-    const read = fs.createReadStream('/dev/pts/0', {
-      fd
-    })
+  const pty = net.createConnection('/dev/pts/0')
 
-    read.on('data', (data) => {
-      connection.send(data)
-    })
+  pty.on('data', (data) => {
+    connection.send(data)
+  })
 
-    const write = fs.createWriteStream('/dev/pts/0', {
-      fd
-    })
-
-    connection.on('message', (message) => {
-      write.write(message)
-    })
-  });
+  connection.on('message', (message) => {
+    pty.write(message)
+  })
 })
 
 server.on('request', (request, response) => {
