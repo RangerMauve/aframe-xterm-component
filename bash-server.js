@@ -4,7 +4,7 @@ const WebSocket = require('ws');
 const os = require('os');
 const path = require('path')
 const net = require('net')
-
+const child_process = require('child_process')
 
 const server = new https.createServer()
 
@@ -13,14 +13,17 @@ const wss = new WebSocket.Server({
 })
 
 wss.on('connection', (connection) => {
-  const pty = net.createConnection('/dev/pts/0')
+  const pty = child_process.swam('/bin/bash', {
+    cwd: process.env.HOME,
+    env: process.env
+  })
 
-  pty.on('data', (data) => {
+  pty.stdout.on('data', (data) => {
     connection.send(data)
   })
 
   connection.on('message', (message) => {
-    pty.write(message)
+    pty.stdin.write(message)
   })
 })
 
