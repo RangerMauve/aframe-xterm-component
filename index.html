@@ -1,42 +1,46 @@
 <!doctype html>
+<meta charset='utf-8'>
 <title>aframe-xterm-component</title>
-<link rel="stylesheet" href="https://unpkg.com/xterm@3.12.0/dist/xterm.css" />
-<script src="https://unpkg.com/xterm@3.12.0/dist/xterm.js"></script>
-<script src="https://aframe.io/releases/0.9.0/aframe.min.js"></script>
+<link rel="stylesheet" href="//unpkg.com/xterm@3.12.0/dist/xterm.css" />
+<script src="//unpkg.com/xterm@3.12.0/dist/xterm.js"></script>
+<script src="//aframe.io/releases/0.9.0/aframe.min.js"></script>
 <script type="text/javascript" src="aframe-xterm-component.js"></script>
 <script type="text/javascript">
 
 AFRAME.registerComponent('xterm-example', {
-  dependencies: ['b'],
+  dependencies: ['xterm'],
   init: function() {
-    const message = `Hello from \x1B[1;3;31m WebVR \x1B[0m!\r\nLook at or click on the terminal and type with your keyboard.\r\n$ `
+    const message = `Run \e[0;32m'node server.js'\e[=l to open a shell`
     const xterm = this.el.components['xterm']
 
     xterm.write(message)
 
+    const socket = new WebSocket('ws://localhost:8080/')
+
+    socket.onmessage = ({data}) => {
+      xterm.write(data)
+    }
+
     // Listen on data, write it to the terminal
     xterm.term.on('data', (data) => {
-      data = data.replace('\r', '\r\n')
-      xterm.write(data)
+      socket.send(data)
     })
+
+    console.log(xterm.term)
   }
 })
 </script>
 <a-scene>
   <a-entity
-    xterm="echo: true;"
     xterm-example
     geometry="primitive: plane; width: 4; height: 2"
-    position="0 2 -3"
+    position="0 2 -2"
   ></a-entity>
 
-  <a-entity camera look-controls wasd-controls position="0 1.6 0">
-    <a-entity cursor="fuse: true; fuseTimeout: 500"
-              position="0 0 -1"
-              geometry="primitive: ring; radiusInner: 0.01; radiusOuter: 0.015"
-              material="color: white; shader: flat"
-              laser-controls="hand: right"
-    ></a-entity>
+  <a-entity wasd-controls>
+    <a-entity camera look-controls position="0 1.6 0">
+    <a-entity cursor="rayOrigin: mouse"></a-entity>
+    <a-entity laser-controls="hand: right"></a-entity>
   </a-entity>
   <a-sky color="#101010"></a-sky>
 </a-scene>
