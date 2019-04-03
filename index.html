@@ -10,7 +10,7 @@
 AFRAME.registerComponent('xterm-example', {
   dependencies: ['xterm'],
   init: function() {
-    const message = 'Run \x1B[1;3;31m\'node server.js\'\x1B[0m to open a shell\n'
+    const message = 'Run \x1B[1;3;31m\'node server.js\'\x1B[0m to open a shell\r\n'
     const xterm = this.el.components['xterm']
 
     xterm.write(message)

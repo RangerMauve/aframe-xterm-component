@@ -66,10 +66,12 @@ const TERMINAL_THEME = {
 AFRAME.registerComponent('xterm', {
   schema: Object.assign({
     cols: {
-      default: 40
+      type: 'number',
+      default: 80
     },
     rows: {
-      default: 20
+      type: 'number',
+      default: 25
     },
   }, TERMINAL_THEME),
 
@@ -101,8 +103,8 @@ AFRAME.registerComponent('xterm', {
       cursorBlink: true,
       disableStdin: false,
       rows: this.data.rows,
-      cols: this.data.columns,
-      fontSize: 32
+      cols: this.data.cols,
+      fontSize: 64
     })
 
     this.term = term
@@ -122,7 +124,7 @@ AFRAME.registerComponent('xterm', {
       const material = this.el.getObject3D('mesh').material
       if (!material.map) return
 
-      this.canvasContext.drawImage(this.cursorCanvas, 0,0)
+      // this.canvasContext.drawImage(this.cursorCanvas, 0,0)
 
       material.map.needsUpdate = true
     })

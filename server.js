@@ -15,8 +15,6 @@ const wss = new WebSocket.Server({
 
 wss.on('connection', (connection) => {
   const ptyProcess = pty.spawn(shell, [], {
-    cols: 80,
-    rows: 10,
     cwd: process.env.HOME,
     env: process.env
   })
