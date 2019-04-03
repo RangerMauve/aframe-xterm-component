@@ -31,12 +31,15 @@ AFRAME.registerComponent('xterm-example', {
 })
 </script>
 <a-scene antialias="true">
-  <a-entity
+  <a-curvedimage
     class="terminal"
     xterm-example
-    geometry="primitive: plane; width: 4; height: 2"
-    position="0 2 -3"
-  ></a-entity>
+    theta-length="60"
+    radius="4.5"
+    height="3"
+    rotation="0 150 0"
+    position="0 2 -2"
+  ></a-curvedimage>
 
   <a-entity wasd-controls>
     <a-entity
