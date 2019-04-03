@@ -111,6 +111,9 @@ AFRAME.registerComponent('xterm', {
 
     this.canvas = terminalElement.querySelector('.xterm-text-layer')
     this.canvas.id = 'terminal-' + (terminalInstance++)
+    this.canvasContext = this.canvas.getContext('2d')
+
+    this.cursorCanvas = terminalElement.querySelector('.xterm-cursor-layer')
 
     this.el.setAttribute('material', 'transparent', true)
     this.el.setAttribute('material', 'src', '#' + this.canvas.id)
@@ -118,6 +121,9 @@ AFRAME.registerComponent('xterm', {
     term.on('refresh', () => {
       const material = this.el.getObject3D('mesh').material
       if (!material.map) return
+
+      this.canvasContext.drawImage(this.cursorCanvas, 0,0)
+
       material.map.needsUpdate = true
     })
 
