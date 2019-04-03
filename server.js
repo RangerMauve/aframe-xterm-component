@@ -5,7 +5,7 @@ const os = require('os');
 const pty = require('node-pty');
 const path = require('path')
 
-const shell = os.platform() === 'win32' ? 'cmd.exe' : 'login';
+const shell = os.platform() === 'win32' ? 'cmd.exe' : 'bash';
 
 const server = new https.createServer()
 
