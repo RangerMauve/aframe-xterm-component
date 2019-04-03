@@ -2,7 +2,7 @@
 
 Render ANSI terminals in Web VR scenes.
 
-![Screenshot of the terminal](Screenshot.png)
+![Screenshot of the terminal](https://raw.githubusercontent.com/RangerMauve/aframe-xterm-component/master/screenshot.png)
 
 ## How it works:
 
