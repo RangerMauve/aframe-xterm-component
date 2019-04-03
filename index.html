@@ -38,8 +38,21 @@ AFRAME.registerComponent('xterm-example', {
     position="0 2 -3"
   ></a-entity>
 
-    <a-entity camera look-controls wasd-controls position="0 1.6 0">
-    <a-entity cursor="rayOrigin: mouse" raycaster="objects: .terminal"></a-entity>
-    <a-entity hand-controls laser-controls raycaster="objects: .terminal"></a-entity>
+  <a-entity wasd-controls>
+    <a-entity
+      camera
+      look-controls
+      position="0 1.6 0"
+    ></a-entity>
+    <a-entity
+      cursor="rayOrigin: mouse"
+      raycaster="objects: .terminal"
+    ></a-entity>
+    <a-entity
+      hand-controls
+      laser-controls
+      raycaster="objects: .terminal"
+    ></a-entity>
+  </a-entity>
   <a-sky color="#101010"></a-sky>
 </a-scene>
