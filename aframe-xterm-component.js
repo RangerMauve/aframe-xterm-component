@@ -90,6 +90,8 @@ AFRAME.registerComponent('xterm', {
 
     this.el.terminalElement = terminalElement
 
+    console.log('Parameters', this.data)
+
     // Build up a theme object
     const theme = Object.keys(this.data).reduce((theme, key) => {
       if (!key.startsWith('theme_')) return theme
@@ -124,9 +126,13 @@ AFRAME.registerComponent('xterm', {
       const material = this.el.getObject3D('mesh').material
       if (!material.map) return
 
-      // this.canvasContext.drawImage(this.cursorCanvas, 0,0)
+      this.canvasContext.drawImage(this.cursorCanvas, 0,0)
 
       material.map.needsUpdate = true
+    })
+
+    term.on('data', (data) => {
+      this.el.emit('xterm-data', data)
     })
 
     this.el.addEventListener('click', () => {

@@ -5,7 +5,7 @@ const os = require('os');
 const pty = require('node-pty');
 const path = require('path')
 
-const shell = os.platform() === 'win32' ? 'cmd.exe' : 'bash';
+const shell = os.platform() === 'win32' ? 'cmd.exe' : 'login';
 
 const server = new https.createServer()
 
@@ -25,6 +25,16 @@ wss.on('connection', (connection) => {
 
   connection.on('message', (message) => {
     ptyProcess.write(message)
+  })
+
+  ptyProcess.once('close', () => {
+    connection.removeAllListeners()
+    connection.close()
+  })
+
+  connection.once('close', () => {
+    ptyProcess.removeAllListeners()
+    ptyProcess.destroy()
   })
 })
 
