@@ -66,10 +66,10 @@ const TERMINAL_THEME = {
 AFRAME.registerComponent('xterm', {
   schema: Object.assign({
     cols: {
-      default: 20
+      default: 40
     },
     rows: {
-      default: 10
+      default: 20
     },
   }, TERMINAL_THEME),
 
