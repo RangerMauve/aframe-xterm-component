@@ -12,6 +12,16 @@ Under the hood, xterm.js is rendering the terminal to a series of canvases. This
 
 From there you can write text to the terminal and respond to feedback.
 
+Make sure to include the xterm.js dependency in addition to the component.
+
+```html
+<link rel="stylesheet" href="//unpkg.com/xterm@3.12.0/dist/xterm.css" />
+<script src="//unpkg.com/xterm@3.12.0/dist/xterm.js"></script>
+<script src="//unpkg.com/aframe-xterm-component/aframe-xterm-component.js"></script>
+```
+
+Here's a quick example of how you can write to the component.
+
 ```javascript
 AFRAME.AFRAME.registerComponent('xterm-example', {
   dependencies: ['xterm'],
