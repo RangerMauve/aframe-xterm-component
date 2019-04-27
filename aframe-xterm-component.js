@@ -84,18 +84,19 @@ AFRAME.registerComponent('xterm', {
       width: 512px;
       height: 256px;
       opacity: 0.0;
+      overflow: hidden;
     `)
 
     this.el.appendChild(terminalElement)
 
     this.el.terminalElement = terminalElement
 
-    console.log('Parameters', this.data)
-
     // Build up a theme object
     const theme = Object.keys(this.data).reduce((theme, key) => {
       if (!key.startsWith('theme_')) return theme
-      theme[key.slice('theme_'.length)] = this.data[key]
+      const data = this.data[key]
+      if(!data) return theme
+      theme[key.slice('theme_'.length)] = data
       return theme
     }, {})
 
